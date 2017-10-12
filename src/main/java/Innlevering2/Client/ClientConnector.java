@@ -1,25 +1,28 @@
 package Innlevering2.Client;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.Socket;
+import java.net.UnknownHostException;
 import java.util.Properties;
 
-public class ServerConnector {
-    private Socket serverConnection;
-    private String adress;
+public class ClientConnector {
+    private Socket ClientConnection;
+    private String address;
     private int port;
 
-    public ServerConnector(String properties){
+    public ClientConnector(String properties){
         try {
             Properties prop = new Properties();
             FileInputStream fileInputStream = new FileInputStream(properties);
             prop.load(fileInputStream);
-            adress = prop.getProperty("adress");
+            address = prop.getProperty("adrdess");
             port = Integer.parseInt(prop.getProperty("port"));
             setConnection();
-        }catch (IOException e){
+        }catch (UnknownHostException e){
+            System.out.println("Unknown server");
+        }
+        catch (IOException e) {
             e.printStackTrace();
         }
 
@@ -27,7 +30,7 @@ public class ServerConnector {
 
     private void setConnection(){
         try {
-            serverConnection = new Socket(adress, port);
+            ClientConnection = new Socket(address, port);
 
         }catch (IOException e){
             e.printStackTrace();
@@ -35,8 +38,8 @@ public class ServerConnector {
 
     }
 
-    public Socket getServerConnection(){
-        return serverConnection;
+    public Socket getClientConnection(){
+        return ClientConnection;
     }
 
 }
