@@ -41,6 +41,4 @@ buildNumber.properties
 .idea/libraries/
 .idea/vcs.xml
 .idea/workspace.xml
-src/main/java/Innlevering2/Client/
-src/main/resources/
-src/test/
+
