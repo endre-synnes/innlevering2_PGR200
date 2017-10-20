@@ -37,28 +37,7 @@ public class ServerApplication implements Runnable{
 
     }
 
-//    public void listenForConnection(){
-//        try (Socket clientConnection = server.getServer().accept()){
-//            DataOutputStream output = new DataOutputStream(clientConnection.getOutputStream());
-//            output.flush();
-//            DataInputStream input = new DataInputStream(clientConnection.getInputStream());
-//
-//            String message = "Velkomen til min server";
-//            output.writeUTF(message);
-//            output.flush();
-//            while (true){
-//                String data = input.readUTF();
-//                System.out.println(data);
-//                if (data.equals("bye")) {
-//                    break;
-//                }
-//            }
-//            output.close();
-//            input.close();
-//        }catch (IOException e){
-//            e.printStackTrace();
-//        }
-//    }
+
 
     public static void main(String[] args) {
         try {

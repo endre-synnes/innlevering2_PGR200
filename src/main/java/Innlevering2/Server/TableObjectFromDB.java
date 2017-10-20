@@ -1,8 +1,9 @@
 package Innlevering2.Server;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class TableObjectFromDB{
+public class TableObjectFromDB implements Serializable{
     private String tableName;
     private String[] columnName, columnDisplaySize, columnTypeName, tablesInDB;
     private ArrayList<String[]> contentOfTable;
