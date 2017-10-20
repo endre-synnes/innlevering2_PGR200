@@ -16,13 +16,11 @@ public class TableManager {
      * @param tableName
      * @return String explaining if i succeeded.
      */
-    public String dropTable(String tableName){
+    public String dropTable(String tableName) throws SQLException{
         try (Connection connection = connector.getConnection()){
             Statement statement = connection.createStatement();
             statement.executeUpdate("DROP TABLE " + tableName);
-            return "Table " + tableName + " is dropped!";
-        }catch (SQLException e){
-            return SQLExceptionHandler.sqlErrorCode(e.getErrorCode());
+            return "TableObjectFromFile " + tableName + " is dropped!";
         }
     }
 

@@ -7,13 +7,15 @@ public class SQLExceptionHandler extends Throwable {
         switch (errorCode){
             case 1217 : return unableToDrop();
             case 1022 : return "This constraint already exist!";
-            case 1146 : return "Check your table or column name!";
+            case 1146 : return "Table or column name does not exist!";
+            case 1054 : return "Unknown column name or value";
             case 1215 : return "Check your table or column name!";
             case 1072 : return "Check if your column name exists!";
             case 1452 : return "At least one row in the child table that references a non-existent row in the parent table";
             case 1064 : return "Wrong formatting in file";
             case 1136 : return "Error while inserting data to table, check for right amount of columns.";
             case 1366 : return "Unexpected data type in content of this file.";
+            case 1045 : return "Could not connect to DB, check your properties-file";
             default: return "Unknown error: " + errorCode;
 
 

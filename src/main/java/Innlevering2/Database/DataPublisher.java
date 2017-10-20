@@ -1,6 +1,6 @@
 package Innlevering2.Database;
 
-import Innlevering2.Server.Table;
+import Innlevering2.Server.TableObjectFromFile;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -15,24 +15,22 @@ public class DataPublisher {
 
     /**
      * Creating a table or overwrites it if the table already exists.
-     * @param tableFromFile
+     * @param tableObjectFromFileFromFile
      * @return String explaining if i succeeded.
      */
-    public String createTableInDatabase(Table tableFromFile) {
+    public String createTableInDatabase(TableObjectFromFile tableObjectFromFileFromFile) throws SQLException{
         try (Connection connection = dbConnector.getConnection();
              PreparedStatement statement = connection.prepareStatement("")){
-            statement.execute("DROP TABLE IF EXISTS " + tableFromFile.getTableName());
-            String sqlSyntax = "CREATE TABLE " + tableFromFile.getTableName() + " (";
-            for (int i = 0; i < tableFromFile.getColumnNames().length; i++) {
-                sqlSyntax += tableFromFile.getColumnNames()[i] + " "
-                        + tableFromFile.getDataTypes()[i] + ",";
+            statement.execute("DROP TABLE IF EXISTS " + tableObjectFromFileFromFile.getTableName());
+            String sqlSyntax = "CREATE TABLE " + tableObjectFromFileFromFile.getTableName() + " (";
+            for (int i = 0; i < tableObjectFromFileFromFile.getColumnNames().length; i++) {
+                sqlSyntax += tableObjectFromFileFromFile.getColumnNames()[i] + " "
+                        + tableObjectFromFileFromFile.getDataTypes()[i] + ",";
             }
-            sqlSyntax += "PRIMARY KEY(" + tableFromFile.getPrimaryKey() + "));";
+            sqlSyntax += "PRIMARY KEY(" + tableObjectFromFileFromFile.getPrimaryKey() + "));";
 
             statement.executeUpdate(sqlSyntax);
             return "Successfully created table!";
-        } catch (SQLException e) {
-            return SQLExceptionHandler.sqlErrorCode(e.getErrorCode());
         }
 
 
@@ -40,45 +38,43 @@ public class DataPublisher {
 
     /**
      * Inserting data into a table if it exist
-     * @param tableFromFile
+     * @param tableObjectFromFileFromFile
      * @return String explaining if i succeeded.
      */
-    public String insertDataToDatabase(Table tableFromFile) {
+    public String insertDataToDatabase(TableObjectFromFile tableObjectFromFileFromFile) throws SQLException, NullPointerException{
         try (Connection connection = dbConnector.getConnection();
              PreparedStatement statement = connection
-                     .prepareStatement(stringBuildingForInsertingDataToDatabase(tableFromFile))) {
+                     .prepareStatement(buildingStringForInsertingDataToDatabase(tableObjectFromFileFromFile))) {
 
             int index = 1;
-            for (int i = 0; i < tableFromFile.getLinesAndColumnsFromFile().length; i++) {
-                for (int j = 0; j < tableFromFile.getLinesAndColumnsFromFile()[i].length; j++) {
-                    statement.setString(index++, tableFromFile.getLinesAndColumnsFromFile()[i][j]);
+            for (int i = 0; i < tableObjectFromFileFromFile.getLinesAndColumnsFromFile().length; i++) {
+                for (int j = 0; j < tableObjectFromFileFromFile.getLinesAndColumnsFromFile()[i].length; j++) {
+                    statement.setString(index++, tableObjectFromFileFromFile.getLinesAndColumnsFromFile()[i][j]);
                 }
             }
             int linesInserted = statement.executeUpdate();
             return "Successfully inserted " + linesInserted + " rows to table";
-        } catch (SQLException e){
-            return SQLExceptionHandler.sqlErrorCode(e.getErrorCode());
         }
     }
 
-    private String stringBuildingForInsertingDataToDatabase(Table table){
+    private String buildingStringForInsertingDataToDatabase(TableObjectFromFile tableObjectFromFile) throws NullPointerException{
         StringBuilder sqlString = new StringBuilder();
         sqlString.append("INSERT INTO ");
-        sqlString.append(table.getTableName());
+        sqlString.append(tableObjectFromFile.getTableName());
         sqlString.append("(");
         int startColumn = 0;
-        if (table.checkForAutoIncrementInTable()) startColumn = 1;
-        int columnCount = table.getColumnNames().length;
+        if (tableObjectFromFile.checkForAutoIncrementInTable()) startColumn = 1;
+        int columnCount = tableObjectFromFile.getColumnNames().length;
 
         for (int i = startColumn; i < columnCount; i++) {
-            sqlString.append(table.getColumnNames()[i]);
+            sqlString.append(tableObjectFromFile.getColumnNames()[i]);
             if (i+1 < columnCount){
                 sqlString.append(",");
             }
         }
         sqlString.append(")\nVALUES\n(");
-        for (int i = 0; i < table.getLinesAndColumnsFromFile().length; i++) {
-            for (int j = 0; j < table.getLinesAndColumnsFromFile()[i].length - 1; j++) {
+        for (int i = 0; i < tableObjectFromFile.getLinesAndColumnsFromFile().length; i++) {
+            for (int j = 0; j < tableObjectFromFile.getLinesAndColumnsFromFile()[i].length - 1; j++) {
                 sqlString.append("?" + ", ");
             }
             sqlString.append("?" + "),\n(");

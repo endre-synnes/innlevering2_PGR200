@@ -20,7 +20,9 @@ public class TableConnector {
      * @return String explaining if i succeeded.
      */
     public String addConstraintToTwoTables(
-            String mainTable, String secondTable, String mainTableColumnName, String secondTableColumnName){
+            String mainTable, String secondTable,
+            String mainTableColumnName, String secondTableColumnName)
+            throws SQLException{
 
         try (Connection connection = connector.getConnection()){
             String constraintText = "fk_" + mainTable + "_" + mainTableColumnName + "_" + secondTableColumnName;
@@ -30,12 +32,7 @@ public class TableConnector {
                     " FOREIGN KEY (`" + mainTableColumnName +"`)" +
                     " REFERENCES `" + secondTable +"` (`" + secondTableColumnName +"`);");
             return "successfully connected " + mainTable + " and " + secondTable;
-
-        }catch (SQLException e){
-            return SQLExceptionHandler.sqlErrorCode(e.getErrorCode());
-
         }
-
     }
 
 }

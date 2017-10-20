@@ -5,7 +5,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 
-public class ServerApplication {
+public class ServerApplication implements Runnable{
 
     private ServerConnector server;
 
@@ -39,5 +39,10 @@ public class ServerApplication {
     public static void main(String[] args) {
         ServerApplication application = new ServerApplication();
         application.listenForConnection();
+    }
+
+    @Override
+    public void run() {
+
     }
 }

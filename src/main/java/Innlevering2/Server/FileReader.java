@@ -12,19 +12,19 @@ public class FileReader {
      * @param filename
      * @return converted file
      */
-    public Table createTableObject(String filename, Table table) {
+    public TableObjectFromFile createTableObject(String filename, TableObjectFromFile tableObjectFromFile) {
         try {
             ArrayList<String> file = readFile(filename);
             ArrayList data = new ArrayList<>();
-            table.setTableName(file.get(0));
-            table.setColumnNames(file.get(1).split(";"));
-            table.setDataTypes(file.get(2).split(";"));
-            table.setPrimaryKey(file.get(3));
+            tableObjectFromFile.setTableName(file.get(0));
+            tableObjectFromFile.setColumnNames(file.get(1).split(";"));
+            tableObjectFromFile.setDataTypes(file.get(2).split(";"));
+            tableObjectFromFile.setPrimaryKey(file.get(3));
             for (int i = 4; i < file.size(); i++) {
                 data.add(file.get(i));
             }
-            table.setLinesColumnsFromFile(data);
-            return table;
+            tableObjectFromFile.setLinesColumnsFromFile(data);
+            return tableObjectFromFile;
         }
         catch (Exception e){
             System.out.println("No such file!");

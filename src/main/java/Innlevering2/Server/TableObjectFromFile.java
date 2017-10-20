@@ -2,14 +2,14 @@ package Innlevering2.Server;
 
 import java.util.ArrayList;
 
-public class Table {
+public class TableObjectFromFile {
     private String primaryKey, tableName;
     private String[] dataTypes, columnNames;
     private String[][] tableFromLinesInFile;
 
-    public Table(){}
+    public TableObjectFromFile(){}
 
-    public Table(ArrayList<String> linesInFile, String primaryKey, String tableName, String[] dataTypes, String[] columnNames) {
+    public TableObjectFromFile(ArrayList<String> linesInFile, String primaryKey, String tableName, String[] dataTypes, String[] columnNames) {
         setPrimaryKey(primaryKey);
         setTableName(tableName);
         setDataTypes(dataTypes);
