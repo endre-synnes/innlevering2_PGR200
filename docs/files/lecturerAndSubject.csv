@@ -1,0 +1,8 @@
+lecturerAndSubject;
+lecturerId;subjectId;
+INT (11) NOT NULL;VARCHAR (11) NOT NULL;
+lecturerId;subjectId;
+1;PGR101;
+2;PRO100;
+1;PRO100;
+2;PRO200;

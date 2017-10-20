@@ -1,0 +1,8 @@
+lecturer;
+id;firstName;lastName;email;
+INT(11) AUTO_INCREMENT ;VARCHAR(50) NOT NULL;VARCHAR(50) NOT NULL;VARCHAR(100) NOT NULL;
+id
+Per;Lauvås;per.lauvås@ansatt.westerdals.no;
+Andrea;Arcuri;andrea.arcuri@ansatt.westerdals.no;
+Rolando;Lorenzo;rolando.lorenzo@ansatt.westerdals.no;
+Stein;Olsen;stein.olsen@ansatt.westerdals.no;

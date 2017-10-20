@@ -33,7 +33,7 @@ public class FileReader {
     }
 
     private ArrayList<String> readFile(String filename){
-        try(Scanner reader = new Scanner(new java.io.FileReader("docs/files/" + filename+".csv"))) {
+        try(Scanner reader = new Scanner(new java.io.FileReader("docs/files/" + filename))) {
             ArrayList list = new ArrayList();
             while (reader.hasNext()) list.add(reader.nextLine());
             return list;

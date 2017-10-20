@@ -1,0 +1,8 @@
+availability;
+weekId;lecturerId;monday;tuesday;wednesday;thursday;friday;
+INT(11) NOT NULL;INT(11) NOT NULL;TINYINT(1) NOT NULL;TINYINT(1) NOT NULL;TINYINT(1) NOT NULL;TINYINT(1) NOT NULL;TINYINT(1) NOT NULL;
+weekId;lecturerId;
+35;1;1;1;1;1;1;
+35;2;1;0;1;0;1;
+35;3;0;1;1;1;0;
+35;4;0;1;1;1;1;

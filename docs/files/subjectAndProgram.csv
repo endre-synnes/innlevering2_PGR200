@@ -1,0 +1,11 @@
+subjectAndProgram;
+subjectId;programId;
+VARCHAR (11) NOT NULL;INT (11) NOT NULL;
+subjectId;programId;
+PGR200;1;
+PGR200;4;
+PRO100;1;
+PRO100;2;
+PRO100;3;
+PRO100;4;
+PRO100;5;

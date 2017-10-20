@@ -1,0 +1,11 @@
+roomTest;
+id;capacity;roomType;
+VARCHAR (11) NOT NULL;INT (11) NOT NULL;VARCHAR(255);
+id;
+F101;260;Auditorium;
+F311;60;Auditorium;
+F303;45;Undervisningsrom;
+F206;45;Undervisningsrom;
+F506;50;Undervisningsrom;
+FU107;6;Grupperom;
+F102;59;Undervisningsrom;
