@@ -20,4 +20,16 @@ in the Database, get metadata from a table and so on.
 
 
 **Comments to my solution**
-I am satisfied 
+
+***The good***
+I am satisfied with the fact that my solution can handle any types of MySQL-tables.
+It is a very dynamic solution. When i send data from the server, it is stored in an object.
+This object gets unpacked by the client and presented to the user with good formatting so it
+is easy to understand for the user of this application.
+
+
+***The bad***
+My solution only send primitives such as Strings to the server, this should be done by Objects.
+Exception handling is not good. I have not had time to fix this as i wanted. The names of variables
+and methods should be better to describe more what they do. I also have to write more tests to
+test all aspects of my solution. Javadoc have to be generated.

@@ -4,6 +4,7 @@ import Innlevering2.Database.DatabaseReader;
 
 import java.io.*;
 import java.net.Socket;
+import java.net.SocketException;
 import java.sql.SQLException;
 
 public class ServerThreadManager extends Thread {
@@ -38,12 +39,12 @@ public class ServerThreadManager extends Thread {
                 outputObject.flush();
             }
             socket.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (SQLException e){
+        }  catch (SQLException e){
             System.out.println(e.getErrorCode());
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (SocketException se){
+            System.out.println("Lost connection to client");
+        }catch (IOException e) {
+            System.out.println("Lost connection to client");
         }
     }
 
