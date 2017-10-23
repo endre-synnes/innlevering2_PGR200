@@ -10,7 +10,7 @@ public class StringCreator {
     public static String getContent(TableObjectFromDB dbTable){
         StringBuilder string = new StringBuilder();
         for (String s: dbTable.getColumnName()) {
-            string.append(String.format("%-25s", s));
+            string.append(String.format("%-30s", s));
         }
         string.append("\n");
         for (int i = 0; i < dbTable.getColumnName().length * 25; i++) { string.append("-"); }

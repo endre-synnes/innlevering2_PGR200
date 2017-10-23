@@ -37,7 +37,7 @@ public class DatabaseReader{
      * @return Populated table from Database
      * @throws Exception
      */
-    public TableObjectFromDB getAllFromOneTable(String tableName, TableObjectFromDB tableObjectFromDB) throws Exception{
+    public TableObjectFromDB getAllFromOneTable(String tableName, TableObjectFromDB tableObjectFromDB) throws SQLException{
         try (Connection connection = dbConnector.getConnection();
              PreparedStatement statement = connection.prepareStatement("")) {
             ResultSet result = statement.executeQuery("SELECT * FROM " + tableName);

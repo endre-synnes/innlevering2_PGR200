@@ -5,7 +5,6 @@ import Innlevering2.Database.DatabaseReader;
 import java.io.*;
 import java.net.Socket;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 public class ServerThreadManager extends Thread {
 
@@ -34,7 +33,6 @@ public class ServerThreadManager extends Thread {
                 dbTable = new TableObjectFromDB();
                 ClientInputManager inputManager = new ClientInputManager(dbReader, dbTable);
                 String[] clientInput = message.split(",");
-                System.out.println("verdi 1: "+clientInput[0] + " verdi 2: " + clientInput[1]);
                 dbTable = inputManager.clientInputTranslator(clientInput);
                 outputObject.writeObject(dbTable);
                 outputObject.flush();

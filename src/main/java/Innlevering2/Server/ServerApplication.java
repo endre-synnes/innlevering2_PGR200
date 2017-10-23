@@ -4,11 +4,8 @@ import Innlevering2.Database.DatabaseConnector;
 import Innlevering2.Database.DatabaseReader;
 import Innlevering2.Database.SQLExceptionHandler;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.net.Socket;
 import java.sql.SQLException;
 
 public class ServerApplication{
@@ -29,7 +26,7 @@ public class ServerApplication{
             DBCreator creator = new DBCreator(dbConnector);
             creator.run();
             DatabaseReader dbReader = new DatabaseReader(dbConnector);
-            ServerCommunicator serverCom = new ServerCommunicator(serverConnector, dbReader);
+            Server serverCom = new Server(serverConnector, dbReader);
             serverCom.runServer();
         }catch (SQLException e){
             System.out.println(SQLExceptionHandler.sqlErrorCode(e.getErrorCode()));

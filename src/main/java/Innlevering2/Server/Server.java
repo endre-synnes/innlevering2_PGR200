@@ -6,12 +6,12 @@ import java.io.*;
 import java.net.Socket;
 import java.sql.SQLException;
 
-public class ServerCommunicator{
+public class Server {
 
     private ServerConnector serverConnector;
     private DatabaseReader dbReader;
 
-    public ServerCommunicator(ServerConnector serverConnector, DatabaseReader dbReader){
+    public Server(ServerConnector serverConnector, DatabaseReader dbReader){
         this.dbReader = dbReader;
         this.serverConnector = serverConnector;
     }
