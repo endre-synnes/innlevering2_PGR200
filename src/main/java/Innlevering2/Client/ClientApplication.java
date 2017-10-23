@@ -7,14 +7,14 @@ import java.io.*;
 import java.net.Socket;
 import java.sql.SQLException;
 
-public class Client {
+public class ClientApplication {
 
     private ClientConnector clientConnector;
     private BufferedReader clientCommand = new BufferedReader(new InputStreamReader(System.in));
     private String commandNumber = "1";
 
 
-    public Client(ClientConnector clientConnector){
+    public ClientApplication(ClientConnector clientConnector){
         this.clientConnector = clientConnector;
     }
 
@@ -111,7 +111,7 @@ public class Client {
     public static void main(String[] args) {
         try {
             ClientConnector clientConnector = new ClientConnector("src/main/resources/ServerProperties.properties");
-            Client c1 = new Client(clientConnector);
+            ClientApplication c1 = new ClientApplication(clientConnector);
             c1.inputAndOutputFromServer();
         } catch (SQLException e) {
             System.out.println(SQLExceptionHandler.sqlErrorCode(e.getErrorCode()));

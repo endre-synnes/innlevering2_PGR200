@@ -10,16 +10,23 @@ public class Server {
 
     private ServerConnector serverConnector;
     private DatabaseReader dbReader;
+    private int clientNumber = 0;
 
     public Server(ServerConnector serverConnector, DatabaseReader dbReader){
         this.dbReader = dbReader;
         this.serverConnector = serverConnector;
     }
 
-
+    /**
+     * Creates new threads for each user.
+     * @throws IOException
+     * @throws SQLException
+     */
     public void runServer() throws IOException, SQLException{
         while (true){
+            clientNumber++;
             Socket socket = serverConnector.getServer().accept();
+            System.out.println("Clients connected: " + clientNumber);
             new ServerThreadManager(socket, dbReader).start();
         }
     }

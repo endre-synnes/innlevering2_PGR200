@@ -27,7 +27,7 @@ public class ServerThreadManager extends Thread {
             ObjectOutputStream outputObject = new ObjectOutputStream(socket.getOutputStream());
 
 
-            System.out.println("Server up and running");
+            System.out.println("ClientApplication have connected to server");
             //input translator
             while ((message = bufferedReader.readLine()) != null){
                 dbTable = new TableObjectFromDB();
