@@ -1,6 +1,7 @@
 package Innlevering2.Server;
 
 import Innlevering2.Database.DatabaseConnector;
+import Innlevering2.Database.DatabaseReader;
 import Innlevering2.Database.SQLExceptionHandler;
 
 import java.io.DataInputStream;
@@ -10,7 +11,7 @@ import java.io.IOException;
 import java.net.Socket;
 import java.sql.SQLException;
 
-public class ServerApplication implements Runnable{
+public class ServerApplication{
 
     private ServerConnector serverConnector;
     private DatabaseConnector dbConnector;
@@ -27,12 +28,17 @@ public class ServerApplication implements Runnable{
         try {
             DBCreator creator = new DBCreator(dbConnector);
             creator.run();
+            DatabaseReader dbReader = new DatabaseReader(dbConnector);
+            ServerCommunicator serverCom = new ServerCommunicator(serverConnector, dbReader);
+            serverCom.runServer();
         }catch (SQLException e){
             System.out.println(SQLExceptionHandler.sqlErrorCode(e.getErrorCode()));
         }catch (FileNotFoundException noFile){
             System.out.println("No file with that name found in directory!");
         }catch (NullPointerException nul){
             System.out.println("Object Not initialised");
+        }catch (IOException e){
+            System.out.println("Could not start server");
         }
 
     }
@@ -45,14 +51,11 @@ public class ServerApplication implements Runnable{
             DatabaseConnector dbConnector = new DatabaseConnector("src/main/resources/DatabaseProperties.properties");
             ServerApplication application = new ServerApplication(serverConnector, dbConnector);
             application.startServer();
+
         }catch (Exception e){
             System.out.println(e.getMessage());
             System.out.println("Error while reading while connecting to db or server, check properties files");
         }
     }
 
-    @Override
-    public void run() {
-
-    }
 }

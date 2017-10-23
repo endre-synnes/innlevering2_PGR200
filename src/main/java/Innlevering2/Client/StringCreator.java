@@ -1,4 +1,6 @@
-package Innlevering2.Server;
+package Innlevering2.Client;
+
+import Innlevering2.Server.TableObjectFromDB;
 
 public class StringCreator {
 
