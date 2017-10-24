@@ -25,7 +25,7 @@ public class Server {
     public void runServer() throws IOException, SQLException{
         while (true){
             clientNumber++;
-            Socket socket = serverConnector.getServer().accept();
+            Socket socket = serverConnector.getServerSocket().accept();
             System.out.println("Clients connected: " + clientNumber);
             new ServerThreadManager(socket, dbReader).start();
         }

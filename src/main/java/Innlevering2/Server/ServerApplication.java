@@ -1,5 +1,6 @@
 package Innlevering2.Server;
 
+import Innlevering2.Database.DataPublisher;
 import Innlevering2.Database.DatabaseConnector;
 import Innlevering2.Database.DatabaseReader;
 import Innlevering2.Database.SQLExceptionHandler;
@@ -23,9 +24,13 @@ public class ServerApplication{
 
     public void startServer(){
         try {
-            DBCreator creator = new DBCreator(dbConnector);
-            creator.run();
+            //Setting up database
             DatabaseReader dbReader = new DatabaseReader(dbConnector);
+            DataPublisher dbPublisher = new DataPublisher(dbConnector);
+            DBCreator creator = new DBCreator(dbPublisher);
+            creator.run();
+
+            //Setting up server
             Server serverCom = new Server(serverConnector, dbReader);
             serverCom.runServer();
         }catch (SQLException e){
@@ -48,10 +53,10 @@ public class ServerApplication{
             DatabaseConnector dbConnector = new DatabaseConnector("src/main/resources/DatabaseProperties.properties");
             ServerApplication application = new ServerApplication(serverConnector, dbConnector);
             application.startServer();
-
-        }catch (Exception e){
+        }catch (IOException e){
             System.out.println(e.getMessage());
-            System.out.println("Error while reading while connecting to db or server, check properties files");
+        }catch (SQLException se){
+            System.out.println(SQLExceptionHandler.sqlErrorCode(se.getErrorCode()));
         }
     }
 

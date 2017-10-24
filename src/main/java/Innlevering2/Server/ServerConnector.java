@@ -6,7 +6,7 @@ import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.util.Properties;
 
-public class ServerConnector {
+public class ServerConnector implements ServerConnectorInterface{
 
     private ServerSocket server;
     private String port;
@@ -24,17 +24,17 @@ public class ServerConnector {
 
     }
 
-    private void setServerSocket(){
+    public void setServerSocket() throws IOException{
         try {
             int portNumber = Integer.parseInt(port);
             server = new ServerSocket(portNumber, 0, InetAddress.getByName("localhost"));
         }catch (IOException e){
-            e.printStackTrace();
+            throw new IOException("Could not set server socket, check properties file.");
         }
     }
 
 
-    public ServerSocket getServer() {
+    public ServerSocket getServerSocket() throws NullPointerException{
         return server;
     }
 }

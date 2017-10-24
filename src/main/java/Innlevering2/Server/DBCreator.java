@@ -10,11 +10,11 @@ import java.sql.SQLException;
 
 public class DBCreator {
 
-    private DatabaseConnector dbConnector;
+    //private DatabaseConnector dbConnector;
+    private DataPublisher dbPublisher;
 
-
-    public DBCreator(DatabaseConnector dbConnector){
-        this.dbConnector = dbConnector;
+    public DBCreator(DataPublisher dbPublisher){
+        this.dbPublisher = dbPublisher;
     }
 
     public void run() throws SQLException, FileNotFoundException, NullPointerException{
@@ -40,19 +40,13 @@ public class DBCreator {
                 tableFromFile = reader.createTableObject(child.getName(), tableFromFile);
                 populateTables(tableFromFile);
             }
-        } else {
-            // Handle the case where dir is not really a directory.
-            // Checking dir.isDirectory() above would not be sufficient
-            // to avoid race conditions with another process that deletes
-            // directories.
         }
     }
 
 
     private void populateTables(TableObjectFromFile tableFromFile) throws SQLException{
-        DataPublisher publisher = new DataPublisher(dbConnector);
-        publisher.createTableInDatabase(tableFromFile);
-        publisher.insertDataToDatabase(tableFromFile);
+        dbPublisher.createTableInDatabase(tableFromFile);
+        dbPublisher.insertDataToDatabase(tableFromFile);
     }
 
 }
