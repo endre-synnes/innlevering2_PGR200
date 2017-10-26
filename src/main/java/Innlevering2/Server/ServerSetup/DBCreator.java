@@ -1,8 +1,6 @@
-package Innlevering2.Server;
+package Innlevering2.Server.ServerSetup;
 
 import Innlevering2.Database.DataPublisher;
-import Innlevering2.Database.DatabaseConnector;
-import Innlevering2.Database.SQLExceptionHandler;
 
 import java.io.File;
 import java.io.FileNotFoundException;

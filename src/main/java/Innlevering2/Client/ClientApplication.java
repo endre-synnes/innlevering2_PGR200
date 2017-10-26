@@ -5,6 +5,7 @@ import Innlevering2.Server.TableObjectFromDB;
 
 import java.io.*;
 import java.net.Socket;
+import java.net.UnknownHostException;
 import java.sql.SQLException;
 
 public class ClientApplication {
@@ -19,13 +20,13 @@ public class ClientApplication {
     }
 
 
-    public void inputAndOutputFromServer() throws NullPointerException, SQLException, ClassNotFoundException, IOException{
+    public void inputAndOutputFromServer() throws NullPointerException, SQLException,
+            ClassNotFoundException, IOException{
         try (Socket socket = clientConnector.getClientConnection()) {
             PrintWriter printWriter = new PrintWriter(socket.getOutputStream(), true);
-
-
             ObjectInputStream inputObject = new ObjectInputStream(socket.getInputStream());
             TableObjectFromDB returnObject = null;
+
             while (true) {
                 //Printing possible user commands
                 System.out.println("\n" + printCommands());
@@ -36,10 +37,14 @@ public class ClientApplication {
                     System.out.println("Invalid command please try again!");
                     continue;
                 }
-                if (userInput.equals("exit")) break;
+                if (userInput.equals("exit")){
+                    printWriter.println(userInput);
+                    break;
+                }
 
                 //Sending to server
                 printWriter.println(userInput);
+
 
 
                 //Reading output from server
@@ -115,8 +120,10 @@ public class ClientApplication {
             c1.inputAndOutputFromServer();
         } catch (SQLException e) {
             System.out.println(SQLExceptionHandler.sqlErrorCode(e.getErrorCode()));
+        }catch (UnknownHostException unknown){
+            System.out.println(unknown.getMessage());
         } catch (IOException e){
-            System.out.println("IO Exception check if correct input");
+            System.out.println(e.getMessage());
         } catch (ClassNotFoundException noClass){
             System.out.println("Could not read object from Server, se if valid object type");
         }

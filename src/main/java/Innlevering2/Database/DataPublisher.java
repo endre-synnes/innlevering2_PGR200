@@ -1,6 +1,6 @@
 package Innlevering2.Database;
 
-import Innlevering2.Server.TableObjectFromFile;
+import Innlevering2.Server.ServerSetup.TableObjectFromFile;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

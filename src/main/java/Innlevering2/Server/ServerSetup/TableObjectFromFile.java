@@ -1,4 +1,4 @@
-package Innlevering2.Server;
+package Innlevering2.Server.ServerSetup;
 
 import java.util.ArrayList;
 

@@ -6,40 +6,32 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.Properties;
 
-public class ClientConnector {
-    private Socket ClientConnection;
+public class ClientConnector implements ClientConnectorInterface{
+    private Socket clientConnection;
     private String address;
     private int port;
 
-    public ClientConnector(String properties){
-        try {
-            Properties prop = new Properties();
-            FileInputStream fileInputStream = new FileInputStream(properties);
-            prop.load(fileInputStream);
-            address = prop.getProperty("adrdess");
-            port = Integer.parseInt(prop.getProperty("port"));
-            setConnection();
-        }catch (UnknownHostException e){
-            System.out.println("Unknown server");
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
-
+    public ClientConnector(String properties) throws IOException{
+        Properties prop = new Properties();
+        FileInputStream fileInputStream = new FileInputStream(properties);
+        prop.load(fileInputStream);
+        address = prop.getProperty("adrdess");
+        port = Integer.parseInt(prop.getProperty("port"));
+        setClientConnection();
     }
 
-    private void setConnection(){
+    public void setClientConnection() throws IOException{
         try {
-            ClientConnection = new Socket(address, port);
-
+            clientConnection = new Socket(address, port);
+        }catch (UnknownHostException unknown){
+            throw new UnknownHostException("Unknown server, check properties file.");
         }catch (IOException e){
-            e.printStackTrace();
+            throw new IOException("Could not connect to server");
         }
-
     }
 
-    public Socket getClientConnection(){
-        return ClientConnection;
+    public Socket getClientConnection() throws NullPointerException{
+        return clientConnection;
     }
 
 }

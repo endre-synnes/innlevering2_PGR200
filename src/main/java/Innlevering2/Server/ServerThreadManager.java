@@ -17,8 +17,13 @@ public class ServerThreadManager extends Thread {
         this.dbReader = dbReader;
     }
 
+    private void readUserInput(){
+
+    }
+
     public void run() {
         try {
+            Boolean clientIsConnected = true;
             String message = null;
             BufferedReader bufferedReader = new BufferedReader(
                     new InputStreamReader(socket.getInputStream()));
@@ -30,15 +35,25 @@ public class ServerThreadManager extends Thread {
 
             System.out.println("ClientApplication have connected to server");
             //input translator
-            while ((message = bufferedReader.readLine()) != null){
-                dbTable = new TableObjectFromDB();
-                ClientInputManager inputManager = new ClientInputManager(dbReader, dbTable);
-                String[] clientInput = message.split(",");
-                dbTable = inputManager.clientInputTranslator(clientInput);
-                outputObject.writeObject(dbTable);
-                outputObject.flush();
+            while (clientIsConnected){
+                message = bufferedReader.readLine();
+                if (message != null) {
+                    dbTable = new TableObjectFromDB();
+                    ClientInputManager inputManager = new ClientInputManager(dbReader, dbTable);
+                    String[] clientInput = message.split(",");
+
+                    if (clientInput[0].equals("exit")){
+                        clientIsConnected = false;
+                        continue;
+                    }
+
+                    dbTable = inputManager.clientInputTranslator(clientInput);
+                    outputObject.writeObject(dbTable);
+                    outputObject.flush();
+                }
             }
             socket.close();
+            System.out.println("Client closed connection");
         }  catch (SQLException e){
             System.out.println(e.getErrorCode());
         } catch (SocketException se){

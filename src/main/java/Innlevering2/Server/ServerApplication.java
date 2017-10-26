@@ -4,6 +4,7 @@ import Innlevering2.Database.DataPublisher;
 import Innlevering2.Database.DatabaseConnector;
 import Innlevering2.Database.DatabaseReader;
 import Innlevering2.Database.SQLExceptionHandler;
+import Innlevering2.Server.ServerSetup.DBCreator;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
