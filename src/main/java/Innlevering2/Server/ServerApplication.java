@@ -26,14 +26,17 @@ public class ServerApplication{
     public void startServer(){
         try {
             //Setting up database
+            System.out.println("Setting up database...");
             DatabaseReader dbReader = new DatabaseReader(dbConnector);
             DataPublisher dbPublisher = new DataPublisher(dbConnector);
             DBCreator creator = new DBCreator(dbPublisher);
             creator.run();
 
             //Setting up server
-            Server serverCom = new Server(serverConnector, dbReader);
-            serverCom.runServer();
+            System.out.println("Setting up server...");
+            Server server = new Server(serverConnector, dbReader);
+            server.runServer();
+            System.out.println("Server is closed");
         }catch (SQLException e){
             System.out.println(SQLExceptionHandler.sqlErrorCode(e.getErrorCode()));
         }catch (FileNotFoundException noFile){

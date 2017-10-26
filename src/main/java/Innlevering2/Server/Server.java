@@ -6,14 +6,14 @@ import java.io.*;
 import java.net.Socket;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
+
 
 public class Server {
 
     private ServerConnector serverConnector;
     private DatabaseReader dbReader;
     private ArrayList<ServerThreadManager> listOfThreads = new ArrayList<>();
+    private int threadName = 1;
 
     public Server(ServerConnector serverConnector, DatabaseReader dbReader){
         this.dbReader = dbReader;
@@ -31,7 +31,9 @@ public class Server {
             ServerThreadManager thread = new ServerThreadManager(socket, dbReader);
             thread.start();
             listOfThreads.add(thread);
-            System.out.println("Clients connected: " + listOfThreads.size());
+            threadName++;
+            thread.setName("Client " + threadName);
+            System.out.println("Number of clients connected: " + listOfThreads.size());
         }
     }
 

@@ -1,6 +1,7 @@
 package Innlevering2.Server;
 
 import Innlevering2.Database.DatabaseReader;
+import Innlevering2.Database.SQLExceptionHandler;
 
 import java.io.*;
 import java.net.Socket;
@@ -23,7 +24,6 @@ public class ServerThreadManager extends Thread {
         try {
             ObjectOutputStream outputObject = new ObjectOutputStream(socket.getOutputStream());
             System.out.println("Client have connected to server");
-            //input translator
             while (clientIsConnected){
                 String message = readUserInput();
                 if (message != null) {
@@ -39,8 +39,6 @@ public class ServerThreadManager extends Thread {
             System.out.println("Client closed connection");
 
 
-        }  catch (SQLException e){
-            System.out.println(e.getErrorCode());
         } catch (SocketException se){
             System.out.println("Lost connection to client");
         }catch (IOException e) {
@@ -54,11 +52,17 @@ public class ServerThreadManager extends Thread {
         return bufferedReader.readLine();
     }
 
-    private TableObjectFromDB handleUserCommand(String message) throws SQLException {
-        TableObjectFromDB dbTable = new TableObjectFromDB();
-        ClientInputManager inputManager = new ClientInputManager(dbReader, dbTable);
-        String[] clientInput = message.split(",");
-        return inputManager.clientInputTranslator(clientInput);
+    private TableObjectFromDB handleUserCommand(String message) {
+        try {
+            TableObjectFromDB dbTable = new TableObjectFromDB();
+            ClientInputManager inputManager = new ClientInputManager(dbReader, dbTable);
+            String[] clientInput = message.split(",");
+            return inputManager.clientInputTranslator(clientInput);
+        }catch (SQLException se){
+            System.out.println(SQLExceptionHandler.sqlErrorCode(se.getErrorCode()));
+            return null;
+        }
+
     }
 
 }

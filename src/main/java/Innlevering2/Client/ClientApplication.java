@@ -24,7 +24,7 @@ public class ClientApplication {
             ClassNotFoundException, IOException{
         try (Socket socket = clientConnector.getClientConnection()) {
             PrintWriter printWriter = new PrintWriter(socket.getOutputStream(), true);
-
+            ObjectInputStream inputObject = new ObjectInputStream(socket.getInputStream());
 
             while (true) {
                 //Printing possible user commands
@@ -45,25 +45,26 @@ public class ClientApplication {
                 printWriter.println(userInput);
 
                 //Reading output from server
-                handleReturnFromServer();
+                handleReturnFromServer(inputObject);
             }
             System.exit(0);
         }
     }
 
 
-    private void handleReturnFromServer() throws IOException, ClassNotFoundException{
-        try (Socket socket = clientConnector.getClientConnection()){
-            ObjectInputStream inputObject = new ObjectInputStream(socket.getInputStream());
-            TableObjectFromDB returnObject = null;
-            returnObject = (TableObjectFromDB) inputObject.readObject();
+    private void handleReturnFromServer(ObjectInputStream inputStream) throws IOException, ClassNotFoundException{
+        try {
+            TableObjectFromDB returnObject;
+            Object objectFromServer = inputStream.readObject();
+
             String result;
-            if (returnObject != null) {
+            if (objectFromServer != null) {
+                returnObject = (TableObjectFromDB) objectFromServer;
                 if (commandNumber.equals("5")) {
                     result = StringCreator.getMetaData(returnObject);
                 } else result = StringCreator.getContent(returnObject);
                 System.out.println("\n" + result);
-            }
+            }else System.out.println("Could not find anything matching your input.");
         }catch (IOException e){
             throw new IOException("Could not handle object from server");
         }

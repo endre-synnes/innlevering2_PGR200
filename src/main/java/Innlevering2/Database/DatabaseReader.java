@@ -42,9 +42,6 @@ public class DatabaseReader{
              PreparedStatement statement = connection.prepareStatement("")) {
             ResultSet result = statement.executeQuery("SELECT * FROM " + tableName);
             return setContentOfTableFromDB(result, tableObjectFromDB);
-        }catch (Exception e){
-            e.printStackTrace();
-            return null;
         }
     }
 
@@ -204,7 +201,7 @@ public class DatabaseReader{
      * @param columnName
      * @return Formatted String
      */
-    private String formatColumnName(String columnName){
+    private String formatColumnName(String columnName) throws NullPointerException{
         columnName = columnName.toLowerCase().replaceAll("_", " ");
         return columnName.substring(0, 1).toUpperCase() + columnName.substring(1);
     }
