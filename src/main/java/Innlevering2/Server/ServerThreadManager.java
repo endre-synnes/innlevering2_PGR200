@@ -11,57 +11,54 @@ public class ServerThreadManager extends Thread {
 
     private Socket socket;
     private DatabaseReader dbReader;
+    private Boolean clientIsConnected = true;
+
 
     public ServerThreadManager(Socket socket, DatabaseReader dbReader){
         this.socket = socket;
         this.dbReader = dbReader;
     }
 
-    private void readUserInput(){
-
-    }
-
     public void run() {
         try {
-            Boolean clientIsConnected = true;
-            String message = null;
-            BufferedReader bufferedReader = new BufferedReader(
-                    new InputStreamReader(socket.getInputStream()));
-
-            //output object
-            TableObjectFromDB dbTable = null;
             ObjectOutputStream outputObject = new ObjectOutputStream(socket.getOutputStream());
-
-
-            System.out.println("ClientApplication have connected to server");
+            System.out.println("Client have connected to server");
             //input translator
             while (clientIsConnected){
-                message = bufferedReader.readLine();
+                String message = readUserInput();
                 if (message != null) {
-                    dbTable = new TableObjectFromDB();
-                    ClientInputManager inputManager = new ClientInputManager(dbReader, dbTable);
-                    String[] clientInput = message.split(",");
-
-                    if (clientInput[0].equals("exit")){
+                    if (message.equals("exit")){
                         clientIsConnected = false;
                         continue;
                     }
-
-                    dbTable = inputManager.clientInputTranslator(clientInput);
-                    outputObject.writeObject(dbTable);
+                    outputObject.writeObject(handleUserCommand(message));
                     outputObject.flush();
                 }
             }
             socket.close();
             System.out.println("Client closed connection");
+
+
         }  catch (SQLException e){
             System.out.println(e.getErrorCode());
         } catch (SocketException se){
             System.out.println("Lost connection to client");
         }catch (IOException e) {
-            System.out.println("Lost connection to client");
+            System.out.println("IO Exception");
         }
     }
 
+    private String readUserInput() throws IOException{
+        BufferedReader bufferedReader = new BufferedReader(
+                new InputStreamReader(socket.getInputStream()));
+        return bufferedReader.readLine();
+    }
+
+    private TableObjectFromDB handleUserCommand(String message) throws SQLException {
+        TableObjectFromDB dbTable = new TableObjectFromDB();
+        ClientInputManager inputManager = new ClientInputManager(dbReader, dbTable);
+        String[] clientInput = message.split(",");
+        return inputManager.clientInputTranslator(clientInput);
+    }
 
 }
