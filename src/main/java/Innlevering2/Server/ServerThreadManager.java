@@ -2,6 +2,8 @@ package Innlevering2.Server;
 
 import Innlevering2.Database.DatabaseReader;
 import Innlevering2.Database.SQLExceptionHandler;
+import com.j256.ormlite.dao.Dao;
+import com.j256.ormlite.dao.DaoManager;
 
 import java.io.*;
 import java.net.Socket;
@@ -19,6 +21,7 @@ public class ServerThreadManager extends Thread {
         this.socket = socket;
         this.dbReader = dbReader;
     }
+
 
     public void run() {
         try {

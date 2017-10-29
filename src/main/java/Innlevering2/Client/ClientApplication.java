@@ -11,8 +11,7 @@ import java.sql.SQLException;
 public class ClientApplication {
 
     private ClientConnector clientConnector;
-    private BufferedReader clientCommand = new BufferedReader(new InputStreamReader(System.in));
-    private String commandNumber = "1";
+    private String userInput = "1";
 
 
     public ClientApplication(ClientConnector clientConnector){
@@ -25,13 +24,14 @@ public class ClientApplication {
         try (Socket socket = clientConnector.getClientConnection()) {
             PrintWriter printWriter = new PrintWriter(socket.getOutputStream(), true);
             ObjectInputStream inputObject = new ObjectInputStream(socket.getInputStream());
+            UserInputConverter inputConverter = new UserInputConverter();
 
             while (true) {
                 //Printing possible user commands
                 System.out.println("\n" + printCommands());
 
                 //Getting input from user
-                String userInput = buildCommandFromUserInput();
+                userInput = inputConverter.buildCommandFromUserInput();
                 if (userInput == null){
                     System.out.println("Invalid command please try again!");
                     continue;
@@ -60,7 +60,7 @@ public class ClientApplication {
             String result;
             if (objectFromServer != null) {
                 returnObject = (TableObjectFromDB) objectFromServer;
-                if (commandNumber.equals("5")) {
+                if (userInput.substring(0,1).equals("5")) {
                     result = StringCreator.getMetaData(returnObject);
                 } else result = StringCreator.getContent(returnObject);
                 System.out.println("\n" + result);
@@ -70,41 +70,7 @@ public class ClientApplication {
         }
     }
 
-    private String buildCommandFromUserInput() throws IOException{
-        commandNumber = clientCommand.readLine();
-        switch (commandNumber){
-            case "1" :
-                return "1";
-            case "2" :
-                return commandNumber + "," + getTableName();
-            case "3" :
-                return commandNumber +
-                        "," + getTableName() +
-                        "," + getColumnName() +
-                        "," + getValue();
-            case "4" :
-                return commandNumber + "," + getTableName();
-            case "5" :
-                return commandNumber + "," + getTableName();
-            case "exit" : return "exit";
-            default: return null;
-        }
-    }
 
-    private String getValue() throws IOException{
-        System.out.println("Enter value: ");
-        return clientCommand.readLine();
-    }
-
-    private String getColumnName() throws IOException{
-        System.out.println("Enter column name: ");
-        return clientCommand.readLine();
-    }
-
-    private String getTableName() throws IOException{
-        System.out.println("Enter table name: ");
-        return clientCommand.readLine();
-    }
 
 
     private String printCommands(){
