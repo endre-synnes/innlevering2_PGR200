@@ -9,7 +9,15 @@
     <children>
       <component id="885b3" class="javax.swing.JComboBox" binding="tableName">
         <constraints/>
-        <properties/>
+        <properties>
+          <toolTipText value="Select Table Name"/>
+        </properties>
+      </component>
+      <component id="47b71" class="javax.swing.JComboBox" binding="ColumnName">
+        <constraints/>
+        <properties>
+          <toolTipText value="Select column name"/>
+        </properties>
       </component>
       <component id="6d7a4" class="javax.swing.JTextField" binding="inputTextField">
         <constraints/>

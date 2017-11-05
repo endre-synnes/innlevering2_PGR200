@@ -10,14 +10,14 @@ import java.net.Socket;
 import java.net.SocketException;
 import java.sql.SQLException;
 
-public class ServerThreadManager extends Thread {
+public class ServerThread extends Thread {
 
     private Socket socket;
     private DatabaseReader dbReader;
     private Boolean clientIsConnected = true;
 
 
-    public ServerThreadManager(Socket socket, DatabaseReader dbReader){
+    public ServerThread(Socket socket, DatabaseReader dbReader){
         this.socket = socket;
         this.dbReader = dbReader;
     }

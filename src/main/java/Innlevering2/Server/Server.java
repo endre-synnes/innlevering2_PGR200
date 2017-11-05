@@ -6,14 +6,13 @@ import java.io.*;
 import java.net.Socket;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 
 public class Server {
 
     private ServerConnector serverConnector;
     private DatabaseReader dbReader;
-    private ArrayList<ServerThreadManager> listOfThreads = new ArrayList<>();
+    private ArrayList<ServerThread> listOfThreads = new ArrayList<>();
     private int threadName = 1;
 
     public Server(ServerConnector serverConnector, DatabaseReader dbReader){
@@ -31,7 +30,7 @@ public class Server {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         while (true){
             Socket socket = serverConnector.getServerSocket().accept();
-            ServerThreadManager thread = new ServerThreadManager(socket, dbReader);
+            ServerThread thread = new ServerThread(socket, dbReader);
             thread.start();
             listOfThreads.add(thread);
             thread.setName("Thread " + threadName);
