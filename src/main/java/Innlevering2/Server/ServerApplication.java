@@ -36,7 +36,8 @@ public class ServerApplication{
             System.out.println("Setting up server...");
             Server server = new Server(serverConnector, dbReader);
             server.runServer();
-            System.out.println("Server is closed");
+            System.out.println("Server is closed!");
+            System.exit(0);
         }catch (SQLException e){
             System.out.println(SQLExceptionHandler.sqlErrorCode(e.getErrorCode()));
         }catch (FileNotFoundException noFile){

@@ -26,9 +26,10 @@ public class ServerThreadManager extends Thread {
     public void run() {
         try {
             ObjectOutputStream outputObject = new ObjectOutputStream(socket.getOutputStream());
-            System.out.println("Client have connected to server");
+            System.out.println("\nClient have connected to: " + this.getName());
             while (clientIsConnected){
                 String message = readUserInput();
+                System.out.println(this.getName() + " got command: " + message);
                 if (message != null) {
                     if (message.equals("exit")){
                         clientIsConnected = false;
@@ -39,7 +40,7 @@ public class ServerThreadManager extends Thread {
                 }
             }
             socket.close();
-            System.out.println("Client closed connection");
+            System.out.println("Client on" + this.getName() + " closed connection");
 
 
         } catch (SocketException se){

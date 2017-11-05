@@ -52,7 +52,6 @@ public class DatabaseConnector implements DatabaseInterface{
             createAndSetDatabase(dataSource.getConnection());
             return dataSource.getConnection();
         }catch (SQLException e){
-            System.out.println(e.getErrorCode());
             throw new SQLException();
         }
     }

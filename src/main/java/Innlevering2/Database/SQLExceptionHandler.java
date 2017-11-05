@@ -16,6 +16,7 @@ public class SQLExceptionHandler extends Throwable {
             case 1136 : return "Error while inserting data to table, check for right amount of columns.";
             case 1366 : return "Unexpected data type in content of this file.";
             case 1045 : return "Could not connect to DB, check your properties-file";
+            case 0 : return "Could not establish connection to database.";
             default: return "Unknown error: " + errorCode;
 
 

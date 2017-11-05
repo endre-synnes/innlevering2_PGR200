@@ -66,7 +66,7 @@ public class ClientApplication {
                 System.out.println("\n" + result);
             }else System.out.println("Could not find anything matching your input.");
         }catch (IOException e){
-            throw new IOException("Could not handle object from server");
+            throw new IOException("Unable to get data from server (server could be offline).");
         }
     }
 

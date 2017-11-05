@@ -6,6 +6,7 @@ import java.io.*;
 import java.net.Socket;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 
 public class Server {
@@ -26,14 +27,17 @@ public class Server {
      * @throws SQLException
      */
     public void runServer() throws IOException, SQLException{
+        System.out.println("Server is running!\n");
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         while (true){
             Socket socket = serverConnector.getServerSocket().accept();
             ServerThreadManager thread = new ServerThreadManager(socket, dbReader);
             thread.start();
             listOfThreads.add(thread);
+            thread.setName("Thread " + threadName);
             threadName++;
-            thread.setName("Client " + threadName);
             System.out.println("Number of clients connected: " + listOfThreads.size());
+            if (reader.readLine().equals("stop")) break;
         }
     }
 

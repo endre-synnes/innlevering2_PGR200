@@ -5,7 +5,7 @@ import java.net.ServerSocket;
 
 public interface ServerConnectorInterface {
 
-    void setServerSocket() throws IOException;
+    void setServerSocket(String address, String port) throws IOException;
 
     ServerSocket getServerSocket() throws NullPointerException;
 }

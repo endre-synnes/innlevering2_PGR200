@@ -5,7 +5,7 @@ import java.net.Socket;
 
 public interface ClientConnectorInterface {
 
-    void setClientConnection() throws IOException;
+    void setClientConnection(String address, String port) throws IOException;
 
-    Socket getClientConnection();
+    Socket getClientConnection() throws NullPointerException;
 }

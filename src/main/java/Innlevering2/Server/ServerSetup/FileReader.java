@@ -1,8 +1,13 @@
 package Innlevering2.Server.ServerSetup;
 
+import com.sun.xml.internal.fastinfoset.util.StringArray;
+import org.apache.xerces.xs.StringList;
+
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class FileReader {
 
@@ -22,10 +27,12 @@ public class FileReader {
             tableObjectFromFile.setColumnNames(file.get(1).split(";"));
             tableObjectFromFile.setDataTypes(file.get(2).split(";"));
             tableObjectFromFile.setPrimaryKey(file.get(3));
-            for (int i = 4; i < file.size(); i++) {
-                data.add(file.get(i));
-            }
+            file
+                    .stream()
+                    .skip(4)
+                    .forEach(data::add);
             tableObjectFromFile.setLinesColumnsFromFile(data);
+
             return tableObjectFromFile;
         } catch (FileNotFoundException noFile){
             throw new FileNotFoundException("No file with that name");
