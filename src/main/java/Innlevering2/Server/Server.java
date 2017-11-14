@@ -27,7 +27,7 @@ public class Server {
      */
     public void runServer() throws IOException, SQLException{
         System.out.println("Server is running!\n");
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        //BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         while (true){
             Socket socket = serverConnector.getServerSocket().accept();
             ServerThread thread = new ServerThread(socket, dbReader);
@@ -36,13 +36,12 @@ public class Server {
             thread.setName("Thread " + threadName);
             threadName++;
             System.out.println("Number of clients connected: " + listOfThreads.size());
-            if (reader.readLine().equals("stop")) break;
+          //  if (reader.readLine().equals("stop")) break;
         }
+
     }
 
-
-
-
-
-
+    public ArrayList<ServerThread> getListOfThreads() {
+        return listOfThreads;
+    }
 }

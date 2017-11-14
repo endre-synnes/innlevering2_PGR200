@@ -39,7 +39,8 @@ public class ServerThread extends Thread {
                     outputObject.flush();
                 }
             }
-            socket.close();
+            this.join();
+
             System.out.println("Client on" + this.getName() + " closed connection");
 
 
@@ -47,6 +48,8 @@ public class ServerThread extends Thread {
             System.out.println("Lost connection to client");
         }catch (IOException e) {
             System.out.println("IO Exception");
+        }catch (InterruptedException ie){
+            System.out.println("Failed to close thread");
         }
     }
 

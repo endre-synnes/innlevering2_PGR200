@@ -24,7 +24,7 @@ public class DatabaseReader{
              PreparedStatement statement = connection.
                      prepareStatement("SELECT Table_Name as TableName  " +
                              "FROM information_schema.tables " +
-                             "where table_schema='pgr200innlevering1'")) {
+                             "where table_schema='" + connection.getCatalog() +"'")) {
             ResultSet result = statement.executeQuery();
             return setContentOfTableFromDB(result, tableObjectFromDB);
         }

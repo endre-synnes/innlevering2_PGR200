@@ -60,13 +60,13 @@ public class DatabaseConnector implements DatabaseInterface{
      * Creats and set the database name
      * @param connection
      */
-    private void createAndSetDatabase(Connection connection){
+    private void createAndSetDatabase(Connection connection) throws SQLException{
         try {
             Statement statement = connection.createStatement();
             statement.executeUpdate("CREATE DATABASE IF NOT EXISTS " + dbName);
             dataSource.setDatabaseName(dbName);
         }catch (SQLException e){
-            System.out.println("Could not set or create Database");
+            throw new SQLException("Could not set or create Database");
         }
     }
 
