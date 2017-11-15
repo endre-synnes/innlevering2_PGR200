@@ -8,6 +8,7 @@ import static org.junit.Assert.*;
 
 import Innlevering2.Server.TableObjectFromDB;
 import org.junit.*;
+import org.junit.rules.ExpectedException;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -39,6 +40,11 @@ public class DBCreatorTest {
         assertEquals(9, objectFromDB.getContentOfTable().size());
     }
 
+    @Test(expected = NullPointerException.class)
+    public void ThrowsNullPointerExceptionWhenDataPublisherIsNull() throws Exception {
+        DBCreator creator = new DBCreator(null);
+        creator.run();
+    }
 
     @After
     public void tearDown() throws Exception {

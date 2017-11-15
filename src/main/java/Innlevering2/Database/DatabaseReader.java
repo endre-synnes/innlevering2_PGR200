@@ -64,36 +64,6 @@ public class DatabaseReader{
         }
     }
 
-    /**
-     *
-     * @param tableName
-     * @param columnName
-     * @param greaterOrLess
-     * @param value
-     * @param tableObjectFromDB
-     * @return Populated table from Database
-     * @throws SQLException
-     */
-    public TableObjectFromDB getLinesWithValuesGreaterOrLessThen(String tableName,
-                                                      String columnName, String greaterOrLess,
-                                                      String value, TableObjectFromDB tableObjectFromDB)
-                                                      throws SQLException{
-        try(Connection connection = dbConnector.getConnection();
-        PreparedStatement statement = connection.prepareStatement("")){
-            String sqlSyntax = "SELECT * FROM " + tableName + " WHERE " + columnName;
-            if (greaterOrLess.equals("greater")){
-                sqlSyntax += " > " + value + ";";
-
-            }
-            else if (greaterOrLess.equals("less")){
-                sqlSyntax += " < " + value + ";";
-
-            }
-            else throw new IllegalArgumentException("Enter a valid input argument ('greater' or 'less')");
-            ResultSet result = statement.executeQuery(sqlSyntax);
-            return setContentOfTableFromDB(result, tableObjectFromDB);
-        }
-    }
 
     /**
      *
@@ -144,6 +114,7 @@ public class DatabaseReader{
             int columnCount = result.getMetaData().getColumnCount();
             ArrayList<String[]> content = new ArrayList<>();
 
+            tableObjectFromDB.setTableName(result.getMetaData().getTableName(1));
             while (result.next()){
                 String[] line = new String[columnCount];
                 for (int i = 0; i < columnCount; i++) {

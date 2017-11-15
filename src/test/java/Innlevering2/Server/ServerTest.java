@@ -35,7 +35,6 @@ public class ServerTest {
 
     }
 
-
 //    @Test
 //    public void isListOfThreadsGettingBiggerForMoreClientsConnected() throws Exception {
 //        Server server = new Server(serverConn, dbReader);
