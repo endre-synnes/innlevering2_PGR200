@@ -15,7 +15,14 @@ public class ClientInputManager {
         this.dbTable = dbTable;
     }
 
-
+    /**
+     * Getting table object from database based on client command.
+     * @param parameters
+     * @return
+     * @throws SQLException
+     * @throws NullPointerException
+     * @throws IndexOutOfBoundsException
+     */
     public TableObjectFromDB clientInputTranslator(String[] parameters) throws SQLException, NullPointerException, IndexOutOfBoundsException{
         switch (parameters[0]){
             case "1" : getAllTables();
@@ -33,22 +40,48 @@ public class ClientInputManager {
         return dbTable;
     }
 
+    /**
+     * Getting metadata
+     * @param tableName
+     * @throws SQLException
+     */
     private void getMetadataFromTable(String tableName) throws SQLException{
         dbTable = dbReader.getMetaDataFromTable(tableName, dbTable);
     }
 
+    /**
+     * getting number of rows
+     * @param tableName
+     * @throws SQLException
+     */
     private void countRowsInTable(String tableName) throws SQLException{
         dbTable = dbReader.countRowsInTable(tableName, dbTable);
     }
 
+    /**
+     * Getting rows with column value
+     * @param tableName
+     * @param columnName
+     * @param value
+     * @throws SQLException
+     */
     private void getLinesWithParameter(String tableName, String columnName, String value) throws SQLException{
         dbTable = dbReader.getLinesThatHasOneParameter(tableName, columnName, value, dbTable);
     }
 
+    /**
+     * Getting table
+     * @param tableName
+     * @throws SQLException
+     */
     private void getOneTable(String tableName) throws SQLException {
         dbTable = dbReader.getAllFromOneTable(tableName, dbTable);
     }
 
+    /**
+     * Getting al tables
+     * @throws SQLException
+     */
     private void getAllTables() throws SQLException{
         dbTable = dbReader.getAllTables(dbTable);
     }

@@ -37,6 +37,12 @@ public class FileReader {
 
     }
 
+    /**
+     * Reading file with filename same as parameter.
+     * @param filename
+     * @return
+     * @throws FileNotFoundException
+     */
     private ArrayList<String> readFile(String filename) throws FileNotFoundException{
         try(Scanner reader = new Scanner(new java.io.FileReader("docs/files/" + filename))) {
             ArrayList list = new ArrayList();

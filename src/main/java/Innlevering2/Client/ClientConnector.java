@@ -10,6 +10,11 @@ public class ClientConnector implements ClientConnectorInterface{
     private Socket clientConnection;
     private String address, port;
 
+    /**
+     * Reading properties file and calling method to set connection.
+     * @param properties
+     * @throws IOException
+     */
     public ClientConnector(String properties) throws IOException{
         Properties prop = new Properties();
         FileInputStream fileInputStream = new FileInputStream(properties);
@@ -19,6 +24,12 @@ public class ClientConnector implements ClientConnectorInterface{
         setClientConnection(address, port);
     }
 
+    /**
+     * Setting client connection to server.
+     * @param address
+     * @param port
+     * @throws IOException
+     */
     public void setClientConnection(String address, String port) throws IOException{
         try {
             int portInt = Integer.parseInt(port);
@@ -30,6 +41,11 @@ public class ClientConnector implements ClientConnectorInterface{
         }
     }
 
+    /**
+     * Getting client connection to server.
+     * @return
+     * @throws NullPointerException
+     */
     public Socket getClientConnection() throws NullPointerException{
         return clientConnection;
     }

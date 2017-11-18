@@ -2,7 +2,11 @@ package Innlevering2.Database;
 
 public class SQLExceptionHandler extends Throwable {
 
-
+    /**
+     * Creating text to display to user if SQLException should occur.
+     * @param errorCode
+     * @return
+     */
     public static String sqlErrorCode(int errorCode){
         switch (errorCode){
             case 1217 : return unableToDrop();

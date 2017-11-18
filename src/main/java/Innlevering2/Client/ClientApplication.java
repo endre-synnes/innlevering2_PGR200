@@ -19,7 +19,15 @@ public class ClientApplication {
     }
 
 
-    public void inputAndOutputFromServer() throws NullPointerException, SQLException,
+    /**
+     * This method is the main loop for the client. It is form this method all input and output
+     * is received and sent to the server.
+     * @throws NullPointerException Object not
+     * @throws SQLException
+     * @throws ClassNotFoundException
+     * @throws IOException
+     */
+    public void run() throws NullPointerException, SQLException,
             ClassNotFoundException, IOException{
         try (Socket socket = clientConnector.getClientConnection()) {
             PrintWriter printWriter = new PrintWriter(socket.getOutputStream(), true);
@@ -52,6 +60,13 @@ public class ClientApplication {
     }
 
 
+    /**
+     * This method handles the object returned from the server and packs it out and
+     * call the method for presenting this as text for the user.
+     * @param inputStream
+     * @throws IOException
+     * @throws ClassNotFoundException
+     */
     private void handleReturnFromServer(ObjectInputStream inputStream) throws IOException, ClassNotFoundException{
         try {
             TableObjectFromDB returnObject;
@@ -71,8 +86,10 @@ public class ClientApplication {
     }
 
 
-
-
+    /**
+     * Printing all possible user commands.
+     * @return
+     */
     private String printCommands(){
         StringBuilder builder = new StringBuilder();
         for (int i = 0; i < 60; i++) { builder.append("#"); }
@@ -89,12 +106,15 @@ public class ClientApplication {
     }
 
 
-
+    /**
+     * Main method to start the client.
+     * @param args
+     */
     public static void main(String[] args) {
         try {
             ClientConnector clientConnector = new ClientConnector("src/main/resources/ServerProperties.properties");
             ClientApplication c1 = new ClientApplication(clientConnector);
-            c1.inputAndOutputFromServer();
+            c1.run();
         } catch (SQLException e) {
             System.out.println(SQLExceptionHandler.sqlErrorCode(e.getErrorCode()));
         }catch (UnknownHostException unknown){

@@ -4,6 +4,7 @@ import Innlevering2.Database.DataPublisher;
 import Innlevering2.Database.DatabaseConnector;
 import Innlevering2.Database.DatabaseReader;
 import Innlevering2.Server.ServerSetup.DBCreator;
+import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -89,5 +90,11 @@ public class ClientInputManagerTest {
 
         assertEquals(3, tableObjectFromDB.getColumnName().length);
         assertEquals("Id", tableObjectFromDB.getColumnName()[0]);
+    }
+
+    @AfterClass
+    public static void tearDown() throws Exception{
+        dbConnector = null;
+        dbReader = null;
     }
 }

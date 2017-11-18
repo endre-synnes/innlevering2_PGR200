@@ -22,7 +22,9 @@ public class ServerApplication{
         }else System.exit(0);
     }
 
-
+    /**
+     * Starting server and handle errors from the server.
+     */
     public void startServer(){
         try {
             //Setting up database
@@ -51,7 +53,10 @@ public class ServerApplication{
     }
 
 
-
+    /**
+     * Main method for the server.
+     * @param args
+     */
     public static void main(String[] args) {
         try {
             ServerConnector serverConnector = new ServerConnector("src/main/resources/ServerProperties.properties");

@@ -8,7 +8,6 @@ import static org.junit.Assert.*;
 
 import Innlevering2.Server.TableObjectFromDB;
 import org.junit.*;
-import org.junit.rules.ExpectedException;
 
 import java.io.IOException;
 import java.sql.SQLException;

@@ -14,7 +14,7 @@ public class DatabaseReader{
     }
 
     /**
-     *
+     *Getting al tables from Database
      * @param tableObjectFromDB
      * @return Populated table from Database
      * @throws SQLException
@@ -31,7 +31,7 @@ public class DatabaseReader{
     }
 
     /**
-     *
+     * Getting all content of one table
      * @param tableName
      * @param tableObjectFromDB
      * @return Populated table from Database
@@ -46,7 +46,7 @@ public class DatabaseReader{
     }
 
     /**
-     *
+     * Getting rows with specific column value.
      * @param tableName
      * @param columnName
      * @param parameter
@@ -66,7 +66,7 @@ public class DatabaseReader{
 
 
     /**
-     *
+     * Getting number of rows in a table
      * @param tableName
      * @param tableObjectFromDB
      * @return Populated table from Database
@@ -81,7 +81,7 @@ public class DatabaseReader{
     }
 
     /**
-     *
+     *Getting metadata from one table
      * @param tableName
      * @param tableObjectFromDB
      * @return Populated table from Database
@@ -101,7 +101,7 @@ public class DatabaseReader{
     }
 
     /**
-     *
+     * Setting content of table object.
      * @param result
      * @param tableObjectFromDB
      * @return Populated table from Database
@@ -134,7 +134,7 @@ public class DatabaseReader{
     }
 
     /**
-     *
+     * Setting metadata of an table object
      * @param result
      * @param tableObjectFromDB
      * @return Populated table from Database
@@ -168,7 +168,7 @@ public class DatabaseReader{
     }
 
     /**
-     *
+     * Removing underscore form column name if necessary.
      * @param columnName
      * @return Formatted String
      */

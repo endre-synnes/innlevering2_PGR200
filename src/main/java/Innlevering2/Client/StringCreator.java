@@ -7,6 +7,11 @@ public class StringCreator {
     public StringCreator(){ }
 
 
+    /**
+     * Getting content of a table object and returning it as an formatted String.
+     * @param dbTable
+     * @return String
+     */
     public static String getContent(TableObjectFromDB dbTable){
         StringBuilder string = new StringBuilder();
         for (String s: dbTable.getColumnName()) {
@@ -24,6 +29,11 @@ public class StringCreator {
         return string.toString();
     }
 
+    /**
+     * Same as getContent(), but his gets the Metadata from the tableObject.
+     * @param dbTable
+     * @return String
+     */
     public static String getMetaData(TableObjectFromDB dbTable){
         StringBuilder string = new StringBuilder();
         string.append(String.format("%-15s%-15s%-15s\n", "Name", "Size", "Data type"));

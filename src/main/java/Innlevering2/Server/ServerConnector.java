@@ -12,6 +12,11 @@ public class ServerConnector implements ServerConnectorInterface{
     private ServerSocket server;
     private String port, address;
 
+    /**
+     * reading properties file and calling method to set server socket.
+     * @param properties
+     * @throws IOException
+     */
     public ServerConnector(String properties) throws IOException{
         try {
             Properties prop = new Properties();
@@ -26,6 +31,12 @@ public class ServerConnector implements ServerConnectorInterface{
 
     }
 
+    /**
+     * Setting server socket.
+     * @param address
+     * @param port
+     * @throws IOException
+     */
     public void setServerSocket(String address, String port) throws IOException{
         try {
             int portNumber = Integer.parseInt(port);
@@ -35,7 +46,11 @@ public class ServerConnector implements ServerConnectorInterface{
         }
     }
 
-
+    /**
+     * Getting server socket.
+     * @return
+     * @throws NullPointerException
+     */
     public ServerSocket getServerSocket() throws NullPointerException{
         return server;
     }

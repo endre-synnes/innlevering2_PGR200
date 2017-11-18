@@ -23,42 +23,57 @@ public class ServerThread extends Thread {
     }
 
 
+    /**
+     * Main loop for the Thread. This method is responsible for keeping the thread alive.
+     * It delegate tasks to methods for reading and writing to client.
+     */
     public void run() {
         try {
             ObjectOutputStream outputObject = new ObjectOutputStream(socket.getOutputStream());
             System.out.println("\nClient have connected to: " + this.getName());
             while (clientIsConnected){
                 String message = readUserInput();
-                System.out.println(this.getName() + " got command: " + message);
                 if (message != null) {
                     if (message.equals("exit")){
                         clientIsConnected = false;
                         continue;
                     }
+                    System.out.println(this.getName() + " got command: " + message);
                     outputObject.writeObject(handleUserCommand(message));
                     outputObject.flush();
                 }
+                else clientIsConnected = false;
             }
+            System.out.println("Client on " + this.getName() + " closed connection");
             this.join();
 
-            System.out.println("Client on" + this.getName() + " closed connection");
 
 
         } catch (SocketException se){
             System.out.println("Lost connection to client");
         }catch (IOException e) {
             System.out.println("IO Exception");
-        }catch (InterruptedException ie){
+        } catch (InterruptedException ie){
             System.out.println("Failed to close thread");
         }
     }
 
+    /**
+     * Reading input from user.
+     * @return
+     * @throws IOException
+     */
     private String readUserInput() throws IOException{
         BufferedReader bufferedReader = new BufferedReader(
                 new InputStreamReader(socket.getInputStream()));
         return bufferedReader.readLine();
     }
 
+    /**
+     * Translate commands from user to something the server understands.
+     * @param message
+     * @return
+     */
     private TableObjectFromDB handleUserCommand(String message) {
         try {
             TableObjectFromDB dbTable = new TableObjectFromDB();
