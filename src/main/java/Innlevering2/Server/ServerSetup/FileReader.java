@@ -9,9 +9,12 @@ public class FileReader {
     public FileReader() {}
 
     /**
-     * Reads a file, then create an object of that file witch is then returned.
-     * @param filename
+     * * Reads a file, then create an object of that file witch is then returned.
+     * @param filename filename
      * @return converted file
+     * @param tableObjectFromFile table object
+     * @throws NullPointerException not initialised
+     * @throws FileNotFoundException not found
      */
     public TableObjectFromFile createTableObject(String filename, TableObjectFromFile tableObjectFromFile)
         throws NullPointerException, FileNotFoundException{
@@ -39,9 +42,9 @@ public class FileReader {
 
     /**
      * Reading file with filename same as parameter.
-     * @param filename
-     * @return
-     * @throws FileNotFoundException
+     * @param filename file name
+     * @return ArrayList of strings
+     * @throws FileNotFoundException file not found
      */
     private ArrayList<String> readFile(String filename) throws FileNotFoundException{
         try(Scanner reader = new Scanner(new java.io.FileReader("docs/files/" + filename))) {

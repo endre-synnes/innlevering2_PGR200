@@ -15,7 +15,7 @@ public class DataPublisher {
 
     /**
      * Creating a table or overwrites it if the table already exists.
-     * @param tableObjectFromFileFromFile
+     * @param tableObjectFromFileFromFile table object
      * @return String explaining if i succeeded.
      */
     public String createTableInDatabase(TableObjectFromFile tableObjectFromFileFromFile) throws SQLException{
@@ -38,7 +38,7 @@ public class DataPublisher {
 
     /**
      * Inserting data into a table if it exist
-     * @param tableObjectFromFileFromFile
+     * @param tableObjectFromFileFromFile table object
      * @return String explaining if i succeeded.
      */
     public String insertDataToDatabase(TableObjectFromFile tableObjectFromFileFromFile) throws SQLException, NullPointerException{

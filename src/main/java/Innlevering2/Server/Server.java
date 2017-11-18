@@ -22,8 +22,8 @@ public class Server {
 
     /**
      * Creates new threads for each user and adds it to an ArrayList
-     * @throws IOException
-     * @throws SQLException
+     * @throws IOException Error wile reading or writing
+     * @throws SQLException SQL
      */
     public void runServer() throws IOException, SQLException{
         System.out.println("Server is running!\n");

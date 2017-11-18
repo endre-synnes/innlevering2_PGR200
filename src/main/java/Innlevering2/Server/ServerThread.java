@@ -60,8 +60,8 @@ public class ServerThread extends Thread {
 
     /**
      * Reading input from user.
-     * @return
-     * @throws IOException
+     * @return String
+     * @throws IOException error while reading
      */
     private String readUserInput() throws IOException{
         BufferedReader bufferedReader = new BufferedReader(
@@ -71,8 +71,8 @@ public class ServerThread extends Thread {
 
     /**
      * Translate commands from user to something the server understands.
-     * @param message
-     * @return
+     * @param message message from user
+     * @return table object
      */
     private TableObjectFromDB handleUserCommand(String message) {
         try {

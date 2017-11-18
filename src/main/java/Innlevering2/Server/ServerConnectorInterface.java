@@ -7,16 +7,16 @@ public interface ServerConnectorInterface {
 
     /**
      * Setting server soket
-     * @param address
-     * @param port
-     * @throws IOException
+     * @param address address
+     * @param port port
+     * @throws IOException error while setting connection
      */
     void setServerSocket(String address, String port) throws IOException;
 
     /**
      * Getting server socket
-     * @return
-     * @throws NullPointerException
+     * @return server socket
+     * @throws NullPointerException not initialised
      */
     ServerSocket getServerSocket() throws NullPointerException;
 }

@@ -18,9 +18,9 @@ public class DBCreator {
 
     /**
      * Calling method to read files and then calling method to populate them into the Database
-     * @throws SQLException
-     * @throws FileNotFoundException
-     * @throws NullPointerException
+     * @throws SQLException SQLException
+     * @throws FileNotFoundException not find file
+     * @throws NullPointerException not initialised
      */
     public void run() throws SQLException, FileNotFoundException, NullPointerException{
         try {
@@ -41,9 +41,9 @@ public class DBCreator {
 
     /**
      * Reading files
-     * @throws NullPointerException
-     * @throws FileNotFoundException
-     * @throws SQLException
+     * @throws NullPointerException not initialised
+     * @throws FileNotFoundException not found
+     * @throws SQLException SQLException
      */
     private void readFiles() throws NullPointerException, FileNotFoundException, SQLException {
         File dir = new File("docs/files/");
@@ -60,8 +60,8 @@ public class DBCreator {
 
     /**
      * Creates and insert into tables
-     * @param tableFromFile
-     * @throws SQLException
+     * @param tableFromFile table from file
+     * @throws SQLException SQLException
      */
     private void populateTables(TableObjectFromFile tableFromFile) throws SQLException{
         dbPublisher.createTableInDatabase(tableFromFile);

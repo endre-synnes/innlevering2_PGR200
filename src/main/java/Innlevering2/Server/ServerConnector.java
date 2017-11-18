@@ -14,8 +14,8 @@ public class ServerConnector implements ServerConnectorInterface{
 
     /**
      * reading properties file and calling method to set server socket.
-     * @param properties
-     * @throws IOException
+     * @param properties file name
+     * @throws IOException error while reading properties file
      */
     public ServerConnector(String properties) throws IOException{
         try {
@@ -33,9 +33,9 @@ public class ServerConnector implements ServerConnectorInterface{
 
     /**
      * Setting server socket.
-     * @param address
-     * @param port
-     * @throws IOException
+     * @param address address
+     * @param port port
+     * @throws IOException error while setting connection
      */
     public void setServerSocket(String address, String port) throws IOException{
         try {
@@ -48,8 +48,8 @@ public class ServerConnector implements ServerConnectorInterface{
 
     /**
      * Getting server socket.
-     * @return
-     * @throws NullPointerException
+     * @return server socket
+     * @throws NullPointerException not initialised
      */
     public ServerSocket getServerSocket() throws NullPointerException{
         return server;

@@ -9,7 +9,7 @@ public class StringCreator {
 
     /**
      * Getting content of a table object and returning it as an formatted String.
-     * @param dbTable
+     * @param dbTable database table
      * @return String
      */
     public static String getContent(TableObjectFromDB dbTable){
@@ -31,7 +31,7 @@ public class StringCreator {
 
     /**
      * Same as getContent(), but his gets the Metadata from the tableObject.
-     * @param dbTable
+     * @param dbTable database table
      * @return String
      */
     public static String getMetaData(TableObjectFromDB dbTable){

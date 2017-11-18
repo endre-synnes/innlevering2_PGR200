@@ -11,8 +11,8 @@ public class UserInputConverter {
 
     /**
      * Building command to send to the server.
-     * @return
-     * @throws IOException
+     * @return string of user commands
+     * @throws IOException could not read user commands
      */
     public String buildCommandFromUserInput() throws IOException {
         commandNumber = clientCommand.readLine();
@@ -37,8 +37,8 @@ public class UserInputConverter {
 
     /**
      * Getting column value form the user.
-     * @return
-     * @throws IOException
+     * @return string of user input
+     * @throws IOException not able to read user input
      */
     private String getValue() throws IOException{
         System.out.println("Enter value: ");
@@ -47,8 +47,8 @@ public class UserInputConverter {
 
     /**
      * Getting column name form the user.
-     * @return
-     * @throws IOException
+     * @return string of user input
+     * @throws IOException not able to read user input
      */
     private String getColumnName() throws IOException{
         System.out.println("Enter column name: ");
@@ -57,8 +57,8 @@ public class UserInputConverter {
 
     /**
      * Getting table name form the user.
-     * @return
-     * @throws IOException
+     * * @return string of user input
+     * @throws IOException not able to read user input
      */
     private String getTableName() throws IOException{
         System.out.println("Enter table name: ");

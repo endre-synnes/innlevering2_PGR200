@@ -12,8 +12,8 @@ public class ClientConnector implements ClientConnectorInterface{
 
     /**
      * Reading properties file and calling method to set connection.
-     * @param properties
-     * @throws IOException
+     * @param properties name of properties file
+     * @throws IOException could not read file
      */
     public ClientConnector(String properties) throws IOException{
         Properties prop = new Properties();
@@ -26,9 +26,9 @@ public class ClientConnector implements ClientConnectorInterface{
 
     /**
      * Setting client connection to server.
-     * @param address
-     * @param port
-     * @throws IOException
+     * @param address server address
+     * @param port port number
+     * @throws IOException unable to ser connection
      */
     public void setClientConnection(String address, String port) throws IOException{
         try {
@@ -43,8 +43,8 @@ public class ClientConnector implements ClientConnectorInterface{
 
     /**
      * Getting client connection to server.
-     * @return
-     * @throws NullPointerException
+     * @return socket
+     * @throws NullPointerException object not initialised
      */
     public Socket getClientConnection() throws NullPointerException{
         return clientConnection;

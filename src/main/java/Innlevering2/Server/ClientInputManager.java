@@ -17,11 +17,11 @@ public class ClientInputManager {
 
     /**
      * Getting table object from database based on client command.
-     * @param parameters
-     * @return
-     * @throws SQLException
-     * @throws NullPointerException
-     * @throws IndexOutOfBoundsException
+     * @param parameters parameters
+     * @return table object
+     * @throws SQLException SQLException
+     * @throws NullPointerException  not initialised
+     * @throws IndexOutOfBoundsException index out of bound
      */
     public TableObjectFromDB clientInputTranslator(String[] parameters) throws SQLException, NullPointerException, IndexOutOfBoundsException{
         switch (parameters[0]){
@@ -42,8 +42,8 @@ public class ClientInputManager {
 
     /**
      * Getting metadata
-     * @param tableName
-     * @throws SQLException
+     * @param tableName table name
+     * @throws SQLException SQL
      */
     private void getMetadataFromTable(String tableName) throws SQLException{
         dbTable = dbReader.getMetaDataFromTable(tableName, dbTable);
@@ -51,8 +51,8 @@ public class ClientInputManager {
 
     /**
      * getting number of rows
-     * @param tableName
-     * @throws SQLException
+     * @param tableName Table name
+     * @throws SQLException SQL
      */
     private void countRowsInTable(String tableName) throws SQLException{
         dbTable = dbReader.countRowsInTable(tableName, dbTable);
@@ -60,10 +60,10 @@ public class ClientInputManager {
 
     /**
      * Getting rows with column value
-     * @param tableName
-     * @param columnName
-     * @param value
-     * @throws SQLException
+     * @param tableName table name
+     * @param columnName column name
+     * @param value value
+     * @throws SQLException SQL
      */
     private void getLinesWithParameter(String tableName, String columnName, String value) throws SQLException{
         dbTable = dbReader.getLinesThatHasOneParameter(tableName, columnName, value, dbTable);
@@ -71,8 +71,8 @@ public class ClientInputManager {
 
     /**
      * Getting table
-     * @param tableName
-     * @throws SQLException
+     * @param tableName table name
+     * @throws SQLException SQL
      */
     private void getOneTable(String tableName) throws SQLException {
         dbTable = dbReader.getAllFromOneTable(tableName, dbTable);
@@ -80,7 +80,7 @@ public class ClientInputManager {
 
     /**
      * Getting al tables
-     * @throws SQLException
+     * @throws SQLException SQL
      */
     private void getAllTables() throws SQLException{
         dbTable = dbReader.getAllTables(dbTable);

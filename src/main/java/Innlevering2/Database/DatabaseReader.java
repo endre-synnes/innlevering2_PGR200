@@ -15,9 +15,9 @@ public class DatabaseReader{
 
     /**
      *Getting al tables from Database
-     * @param tableObjectFromDB
+     * @param tableObjectFromDB table object
      * @return Populated table from Database
-     * @throws SQLException
+     * @throws SQLException sqlexception
      */
     public TableObjectFromDB getAllTables(TableObjectFromDB tableObjectFromDB) throws SQLException{
         try (Connection connection = dbConnector.getConnection();
@@ -32,10 +32,10 @@ public class DatabaseReader{
 
     /**
      * Getting all content of one table
-     * @param tableName
-     * @param tableObjectFromDB
+     * @param tableName table name
+     * @param tableObjectFromDB table object
      * @return Populated table from Database
-     * @throws Exception
+     * @throws SQLException sqlexception
      */
     public TableObjectFromDB getAllFromOneTable(String tableName, TableObjectFromDB tableObjectFromDB) throws SQLException{
         try (Connection connection = dbConnector.getConnection();
@@ -47,12 +47,12 @@ public class DatabaseReader{
 
     /**
      * Getting rows with specific column value.
-     * @param tableName
-     * @param columnName
-     * @param parameter
-     * @param tableObjectFromDB
+     * @param tableName table name
+     * @param columnName column name
+     * @param parameter column value
+     * @param tableObjectFromDB table object
      * @return Populated table from Database
-     * @throws SQLException
+     * @throws SQLException SQLException
      */
     public TableObjectFromDB getLinesThatHasOneParameter(String tableName, String columnName,
                                               String parameter, TableObjectFromDB tableObjectFromDB) throws SQLException{
@@ -67,8 +67,8 @@ public class DatabaseReader{
 
     /**
      * Getting number of rows in a table
-     * @param tableName
-     * @param tableObjectFromDB
+     * @param tableName table name
+     * @param tableObjectFromDB table object
      * @return Populated table from Database
      * @throws SQLException
      */
@@ -82,11 +82,11 @@ public class DatabaseReader{
 
     /**
      *Getting metadata from one table
-     * @param tableName
-     * @param tableObjectFromDB
+     * @param tableName table name
+     * @param tableObjectFromDB table object
      * @return Populated table from Database
-     * @throws SQLException
-     * @throws NullPointerException
+     * @throws SQLException SQLException
+     * @throws NullPointerException not initialised
      */
     public TableObjectFromDB getMetaDataFromTable(String tableName, TableObjectFromDB tableObjectFromDB)
             throws SQLException, NullPointerException{
@@ -102,11 +102,11 @@ public class DatabaseReader{
 
     /**
      * Setting content of table object.
-     * @param result
-     * @param tableObjectFromDB
+     * @param result result set
+     * @param tableObjectFromDB table object
      * @return Populated table from Database
-     * @throws NullPointerException
-     * @throws SQLException
+     * @throws NullPointerException not initialised
+     * @throws SQLException SQLException
      */
     private TableObjectFromDB setContentOfTableFromDB(ResultSet result, TableObjectFromDB tableObjectFromDB)
         throws NullPointerException, SQLException{
@@ -135,11 +135,11 @@ public class DatabaseReader{
 
     /**
      * Setting metadata of an table object
-     * @param result
-     * @param tableObjectFromDB
+     * @param result result set
+     * @param tableObjectFromDB table object
      * @return Populated table from Database
-     * @throws NullPointerException
-     * @throws SQLException
+     * @throws NullPointerException not initalised
+     * @throws SQLException sqlException
      */
     private TableObjectFromDB setTableMetadata(ResultSet result, TableObjectFromDB tableObjectFromDB)
             throws NullPointerException, SQLException {
@@ -169,7 +169,7 @@ public class DatabaseReader{
 
     /**
      * Removing underscore form column name if necessary.
-     * @param columnName
+     * @param columnName column name
      * @return Formatted String
      */
     private String formatColumnName(String columnName) throws NullPointerException{

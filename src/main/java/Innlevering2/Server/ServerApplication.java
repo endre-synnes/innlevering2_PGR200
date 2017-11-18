@@ -55,7 +55,7 @@ public class ServerApplication{
 
     /**
      * Main method for the server.
-     * @param args
+     * @param args no argument
      */
     public static void main(String[] args) {
         try {

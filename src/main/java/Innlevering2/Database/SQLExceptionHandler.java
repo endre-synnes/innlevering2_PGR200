@@ -4,8 +4,8 @@ public class SQLExceptionHandler extends Throwable {
 
     /**
      * Creating text to display to user if SQLException should occur.
-     * @param errorCode
-     * @return
+     * @param errorCode error code
+     * @return string
      */
     public static String sqlErrorCode(int errorCode){
         switch (errorCode){

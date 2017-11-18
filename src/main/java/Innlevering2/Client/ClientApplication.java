@@ -22,12 +22,11 @@ public class ClientApplication {
     /**
      * This method is the main loop for the client. It is form this method all input and output
      * is received and sent to the server.
-     * @throws NullPointerException Object not
-     * @throws SQLException
-     * @throws ClassNotFoundException
-     * @throws IOException
+     * @throws NullPointerException Object not initialised
+     * @throws ClassNotFoundException Could not understand type of object
+     * @throws IOException Unknown error
      */
-    public void run() throws NullPointerException, SQLException,
+    public void run() throws NullPointerException,
             ClassNotFoundException, IOException{
         try (Socket socket = clientConnector.getClientConnection()) {
             PrintWriter printWriter = new PrintWriter(socket.getOutputStream(), true);
@@ -63,9 +62,9 @@ public class ClientApplication {
     /**
      * This method handles the object returned from the server and packs it out and
      * call the method for presenting this as text for the user.
-     * @param inputStream
-     * @throws IOException
-     * @throws ClassNotFoundException
+     * @param inputStream input from user
+     * @throws IOException  Not able to read
+     * @throws ClassNotFoundException Could not read return object form server
      */
     private void handleReturnFromServer(ObjectInputStream inputStream) throws IOException, ClassNotFoundException{
         try {
@@ -88,7 +87,7 @@ public class ClientApplication {
 
     /**
      * Printing all possible user commands.
-     * @return
+     * @return string of commands
      */
     private String printCommands(){
         StringBuilder builder = new StringBuilder();
@@ -108,16 +107,14 @@ public class ClientApplication {
 
     /**
      * Main method to start the client.
-     * @param args
+     * @param args no parameters
      */
     public static void main(String[] args) {
         try {
             ClientConnector clientConnector = new ClientConnector("src/main/resources/ServerProperties.properties");
             ClientApplication c1 = new ClientApplication(clientConnector);
             c1.run();
-        } catch (SQLException e) {
-            System.out.println(SQLExceptionHandler.sqlErrorCode(e.getErrorCode()));
-        }catch (UnknownHostException unknown){
+        } catch (UnknownHostException unknown){
             System.out.println(unknown.getMessage());
         } catch (IOException e){
             System.out.println(e.getMessage());

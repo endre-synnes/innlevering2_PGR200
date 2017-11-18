@@ -7,8 +7,8 @@ public interface DatabaseInterface {
 
     /**
      * Getting connection to Database.
-     * @return
-     * @throws SQLException
+     * @return connection to database
+     * @throws SQLException could not get connection
      */
     public Connection getConnection() throws SQLException;
 

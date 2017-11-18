@@ -23,9 +23,9 @@ public class DatabaseConnector implements DatabaseInterface{
 
     /**
      * Reads the properties file and call method to drop DB if it already exists.
-     * @param properties
-     * @throws SQLException
-     * @throws IOException
+     * @param properties name of properties file
+     * @throws SQLException not able to connect to database
+     * @throws IOException could not read file
      */
     public DatabaseConnector(String properties) throws SQLException, IOException{
         try (FileInputStream fileInputStream = new FileInputStream(properties)){
@@ -43,8 +43,8 @@ public class DatabaseConnector implements DatabaseInterface{
 
     /**
      * Getting connection to database.
-     * @return
-     * @throws SQLException
+     * @return Connection to server
+     * @throws SQLException could not get connection
      */
     @Override
     public Connection getConnection() throws SQLException{
@@ -63,7 +63,7 @@ public class DatabaseConnector implements DatabaseInterface{
 
     /**
      * Creates and set the database name
-     * @param connection
+     * @param connection connection
      */
     private void createAndSetDatabase(Connection connection) throws SQLException{
         try {
@@ -77,8 +77,8 @@ public class DatabaseConnector implements DatabaseInterface{
 
     /**
      * Dropping Database if it already exists.
-     * @param connection
-     * @throws SQLException
+     * @param connection connection
+     * @throws SQLException could not drop database
      */
     private void dropDatabaseIfExist (Connection connection) throws SQLException{
         try (Statement statement = connection.createStatement()){
