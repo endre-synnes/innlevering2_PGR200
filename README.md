@@ -40,3 +40,11 @@ My solution only send primitives such as Strings to the server, this should be d
 I should have written more tests, but It is really hard to test communication between client and 
 server of a Socket. I should also have used The interfaces in a better way. This is described more 
 in my documentation. 
+
+## References ##
+
+In my assignment, I have based on the methods "createTable" and "insert" that is in the solution 
+I've referred to here. I have built on these and added superior functionality as you can see in my solution.
+
+https://github.com/NikitaZhevnitskiy/dbService
+
