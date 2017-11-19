@@ -36,7 +36,7 @@ public class StringCreator {
      */
     public static String getMetaData(TableObjectFromDB dbTable){
         StringBuilder string = new StringBuilder();
-        string.append(String.format("%-15s%-15s%-15s\n", "Name", "Size", "Data type"));
+        string.append(String.format("%-15s%-15s%-15s\n", "Name", "Data type", "Size"));
         for (int i = 0; i < 40; i++) { string.append("-"); }
         string.append("\n");
         for (int i = 0; i < dbTable.getColumnName().length; i++) {
